@@ -1,0 +1,1959 @@
+{
+  "info": {
+    "_postman_id": "09ae11ec-6b06-4d0a-a853-5ad27ca8e293",
+    "name": "Nhom09movie",
+    "description": "Movie App - Group 09 | Auth + Movie API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53774014",
+    "_collection_link": "https://go.postman.co/collection/53774014-09ae11ec-6b06-4d0a-a853-5ad27ca8e293?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"password123\",\n  \"username\": \"testuser01\",\n  \"firstName\": \"Nguyen\",\n  \"lastName\": \"Van A\",\n  \"phoneNumber\": \"0912345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Đăng ký tài khoản mới. Hệ thống sẽ gửi OTP qua email để kích hoạt."
+          },
+          "response": [
+            {
+              "name": "201 - Register Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"password123\",\n  \"username\": \"testuser01\",\n  \"firstName\": \"Nguyen\",\n  \"lastName\": \"Van A\",\n  \"phoneNumber\": \"0912345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Đăng ký thành công! Vui lòng kiểm tra email để nhận mã OTP kích hoạt tài khoản (hiệu lực 5 phút).\"\n}"
+            },
+            {
+              "name": "400 - Validation Error (missing email)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Dữ liệu đầu vào không hợp lệ.\",\n  \"errors\": [\n    {\"field\": \"email\", \"message\": \"Email là bắt buộc.\"}\n  ]\n}"
+            },
+            {
+              "name": "409 - Email already exists",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Email đã được sử dụng.\"\n}"
+            },
+            {
+              "name": "429 - Too Many Requests",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"password123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/register",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Quá nhiều yêu cầu. Vui lòng thử lại sau.\",\n  \"retryAfterSeconds\": 900\n}"
+            }
+          ]
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"123456\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/verify-otp",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "verify-otp"
+              ]
+            },
+            "description": "Xác minh OTP nhận qua email để kích hoạt tài khoản. OTP có hiệu lực 5 phút."
+          },
+          "response": [
+            {
+              "name": "200 - Verify OTP Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/verify-otp",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "verify-otp"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Kích hoạt tài khoản thành công! Bạn có thể đăng nhập ngay bây giờ.\"\n}"
+            },
+            {
+              "name": "400 - Invalid OTP",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"000000\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/verify-otp",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "verify-otp"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"OTP không hợp lệ hoặc đã hết hạn.\"\n}"
+            },
+            {
+              "name": "400 - Validation Error (invalid OTP format)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"abc\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/verify-otp",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "verify-otp"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Dữ liệu đầu vào không hợp lệ.\",\n  \"errors\": [\n    {\"field\": \"otp\", \"message\": \"OTP phải là 6 chữ số.\"}\n  ]\n}"
+            },
+            {
+              "name": "404 - Pending session expired",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/verify-otp",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "verify-otp"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Phiên đăng ký đã hết hạn. Vui lòng đăng ký lại.\"\n}"
+            },
+            {
+              "name": "429 - Too Many Requests",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"123456\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/verify-otp",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "verify-otp"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Quá nhiều yêu cầu. Vui lòng thử lại sau.\",\n  \"retryAfterSeconds\": 900\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Login_rateLimit",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"testuser@example.com\",\r\n    \"password\":\"password123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "105"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"69-IG0qXdT6MjKQB7OnUncqpBFdPZw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 08 May 2026 08:40:13 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n    \"success\": false,\n    \"message\": \"Quá nhiều yêu cầu. Vui lòng thử lại sau.\",\n    \"retryAfterSeconds\": 212\n}"
+            },
+            {
+              "name": "Login_Validation",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"password\":\"pas\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "5"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "4"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "217"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"d9-8yREu/zH7fsVTVxiuJ9EGxrxGDs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 08 May 2026 08:37:21 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n    \"success\": false,\n    \"message\": \"Dữ liệu đầu vào không hợp lệ.\",\n    \"errors\": [\n        {\n            \"field\": \"email\",\n            \"message\": \"Email là bắt buộc.\"\n        },\n        {\n            \"field\": \"password\",\n            \"message\": \"Mật khẩu phải có ít nhất 6 ký tự.\"\n        }\n    ]\n}"
+            },
+            {
+              "name": "CreateAccessFreshToken",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\":\"testuser@example.com\",\r\n    \"password\":\"password123\"\r\n}"
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/login",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "X-RateLimit-Limit",
+                  "value": "5"
+                },
+                {
+                  "key": "X-RateLimit-Remaining",
+                  "value": "2"
+                },
+                {
+                  "key": "Set-Cookie",
+                  "value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZmQ4ODk4NzI0YjY0NjgyNTE3MDBhNyIsImVtYWlsIjoidGVzdHVzZXJAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyMDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzgyMzMxMzAsImV4cCI6MTc3ODIzNDAzMH0.RK63xIspBO4iKKIld0quVqVsPVUP96XrJTg1a6OJ_pw; Max-Age=900; Path=/; Expires=Fri, 08 May 2026 09:53:50 GMT; HttpOnly; SameSite=Strict"
+                },
+                {
+                  "key": "Set-Cookie",
+                  "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZmQ4ODk4NzI0YjY0NjgyNTE3MDBhNyIsImVtYWlsIjoidGVzdHVzZXJAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyMDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzgyMzMxMzAsImV4cCI6MTc3ODgzNzkzMH0.XzvLZIPZqP__n18yy_DnfPK3MtUiI0zSl6j8puDh_s8; Max-Age=604800; Path=/; Expires=Fri, 15 May 2026 09:38:50 GMT; HttpOnly; SameSite=Strict"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "190"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"be-Gzev5NZRB0MSOYL/XVCL4ZOEwvg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 08 May 2026 09:38:50 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Đăng nhập thành công!\",\n    \"data\": {\n        \"id\": \"69fd8898724b6468251700a7\",\n        \"email\": \"testuser@example.com\",\n        \"username\": \"testuser01\",\n        \"role\": \"ADMIN\",\n        \"url\": \"/admin/profile\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "FreshToken",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"testuser@example.com\",\r\n    \"password\":\"password123\"\r\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "FreshToken",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Set-Cookie",
+                    "value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZmQ4ODk4NzI0YjY0NjgyNTE3MDBhNyIsImVtYWlsIjoidGVzdHVzZXJAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyMDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzgyMzY5MDAsImV4cCI6MTc3ODIzNzgwMH0.ISu2Zq8USAsCyll0NXS37iism_nI8PrBRbwotQABKsI; Max-Age=900; Path=/; Expires=Fri, 08 May 2026 10:56:40 GMT; HttpOnly; SameSite=Strict",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Set-Cookie",
+                    "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZmQ4ODk4NzI0YjY0NjgyNTE3MDBhNyIsImVtYWlsIjoidGVzdHVzZXJAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyMDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzgyMzY5MDAsImV4cCI6MTc3ODg0MTcwMH0.7WOjyPFheyYrnwOPjXN3Qj9NccUUWVMER9K19DLRPiw; Max-Age=604800; Path=/; Expires=Fri, 15 May 2026 10:41:40 GMT; HttpOnly; SameSite=Strict",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/refresh",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "refresh"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Set-Cookie",
+                  "value": "accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZmQ4ODk4NzI0YjY0NjgyNTE3MDBhNyIsImVtYWlsIjoidGVzdHVzZXJAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyMDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzgyMzY5NTcsImV4cCI6MTc3ODIzNzg1N30.-Klz1uPZdGdyqWpln__HiupTMjMz5D9-zciuZfUnnVk; Max-Age=900; Path=/; Expires=Fri, 08 May 2026 10:57:37 GMT; HttpOnly; SameSite=Strict"
+                },
+                {
+                  "key": "Set-Cookie",
+                  "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZmQ4ODk4NzI0YjY0NjgyNTE3MDBhNyIsImVtYWlsIjoidGVzdHVzZXJAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyMDEiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzgyMzY5NTcsImV4cCI6MTc3ODg0MTc1N30.WK9kHd9Z3ayBcbR2JTTlSEFfKHp0KowKWPnVKhvA1zo; Max-Age=604800; Path=/; Expires=Fri, 15 May 2026 10:42:37 GMT; HttpOnly; SameSite=Strict"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "190"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"be-Gzev5NZRB0MSOYL/XVCL4ZOEwvg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 08 May 2026 10:42:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Đăng nhập thành công!\",\n    \"data\": {\n        \"id\": \"69fd8898724b6468251700a7\",\n        \"email\": \"testuser@example.com\",\n        \"username\": \"testuser01\",\n        \"role\": \"ADMIN\",\n        \"url\": \"/admin/profile\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"testuser@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/forgot-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "forgot-password"
+              ]
+            },
+            "description": "Gửi OTP đặt lại mật khẩu qua email."
+          },
+          "response": [
+            {
+              "name": "200 - Forgot Password Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/forgot-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "forgot-password"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Đã gửi mã OTP đặt lại mật khẩu. Vui lòng kiểm tra email (hiệu lực 5 phút).\",\n  \"data\": null\n}"
+            },
+            {
+              "name": "400 - Validation Error (missing email)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/forgot-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "forgot-password"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Dữ liệu đầu vào không hợp lệ.\",\n  \"errors\": [\n    {\"field\": \"email\", \"message\": \"Email là bắt buộc.\"}\n  ]\n}"
+            },
+            {
+              "name": "404 - Email not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"notfound@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/forgot-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "forgot-password"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Email không tồn tại.\",\n  \"data\": null\n}"
+            },
+            {
+              "name": "429 - Too Many Requests",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/forgot-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "forgot-password"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Quá nhiều yêu cầu. Vui lòng thử lại sau.\",\n  \"retryAfterSeconds\": 300\n}"
+            }
+          ]
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"123456\",\n  \"newPassword\": \"newPassword123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/auth/reset-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "auth",
+                "reset-password"
+              ]
+            },
+            "description": "Xác thực OTP và đặt lại mật khẩu."
+          },
+          "response": [
+            {
+              "name": "200 - Reset Password Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"123456\",\n  \"newPassword\": \"newPassword123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/reset-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "reset-password"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Đặt lại mật khẩu thành công. Bạn có thể đăng nhập lại.\",\n  \"data\": null\n}"
+            },
+            {
+              "name": "400 - Validation Error (missing fields)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/reset-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "reset-password"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Dữ liệu đầu vào không hợp lệ.\",\n  \"errors\": [\n    {\"field\": \"otp\", \"message\": \"OTP là bắt buộc.\"},\n    {\"field\": \"newPassword\", \"message\": \"Mật khẩu mới là bắt buộc.\"}\n  ]\n}"
+            },
+            {
+              "name": "400 - Invalid OTP",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"testuser@example.com\",\n  \"otp\": \"000000\",\n  \"newPassword\": \"newPassword123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/reset-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "reset-password"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"OTP không hợp lệ hoặc đã hết hạn.\",\n  \"data\": null\n}"
+            },
+            {
+              "name": "404 - Email not found",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"notfound@example.com\",\n  \"otp\": \"123456\",\n  \"newPassword\": \"newPassword123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/auth/reset-password",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "auth",
+                    "reset-password"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Email không tồn tại.\",\n  \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/user/getProfile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "user",
+                "profile"
+              ]
+            },
+            "description": "Lấy thông tin user đang đăng nhập (JWT lấy từ cookie accessToken)."
+          },
+          "response": [
+            {
+              "name": "200 - Get Profile Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/user/getProfile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "user",
+                    "getProfile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Lấy thông tin hồ sơ thành công!\",\n  \"data\": {\n    \"id\": \"69fd8898724b6468251700a7\",\n    \"email\": \"testuser@example.com\",\n    \"username\": \"testuser01\",\n    \"role\": \"USER\",\n    \"firstName\": \"Nguyen\",\n    \"lastName\": \"Van B\",\n    \"address\": \"123 Le Loi, Q1\",\n    \"phoneNumber\": \"0912345678\"\n  }\n}"
+            },
+            {
+              "name": "401 - Unauthorized (missing token)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/user/getProfile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "user",
+                    "getProfile"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Không tìm thấy access token. Vui lòng đăng nhập lại.\",\n  \"data\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Edit Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Nguyen\",\n  \"lastName\": \"Van B\",\n  \"address\": \"123 Le Loi, Q1\",\n  \"phoneNumber\": \"0912345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/user/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "user",
+                "profile"
+              ]
+            },
+            "description": "Chỉnh sửa hồ sơ (JWT lấy từ cookie accessToken)."
+          },
+          "response": [
+            {
+              "name": "200 - Update Profile Success",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Nguyen\",\n  \"lastName\": \"Van B\",\n  \"address\": \"123 Le Loi, Q1\",\n  \"phoneNumber\": \"0912345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/user/profile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "user",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Cập nhật hồ sơ thành công!\",\n  \"data\": {\n    \"id\": \"69fd8898724b6468251700a7\",\n    \"email\": \"testuser@example.com\",\n    \"username\": \"testuser01\",\n    \"role\": \"USER\",\n    \"firstName\": \"Nguyen\",\n    \"lastName\": \"Van B\",\n    \"address\": \"123 Le Loi, Q1\",\n    \"phoneNumber\": \"0912345678\"\n  }\n}"
+            },
+            {
+              "name": "400 - Validation Error",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/user/profile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "user",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Dữ liệu đầu vào không hợp lệ.\",\n  \"errors\": [\n    {\"field\": \"payload\", \"message\": \"Cần ít nhất một trường để cập nhật.\"}\n  ]\n}"
+            },
+            {
+              "name": "401 - Unauthorized (missing token)",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"Nguyen\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/user/profile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "user",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Không tìm thấy access token. Vui lòng đăng nhập lại.\",\n  \"data\": null\n}"
+            },
+            {
+              "name": "409 - Phone already exists",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"phoneNumber\": \"0912345678\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/user/profile",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "user",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"success\": false,\n  \"message\": \"Số điện thoại đã được sử dụng.\",\n  \"data\": null\n}"
+            }
+          ]
+        }
+      ],
+      "description": "Authentication endpoints: Register + OTP Verification"
+    },
+    {
+      "name": "Movies",
+      "item": [
+        {
+          "name": "Get Movies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/movies?page=1&limit=10",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "movies"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Lấy danh sách phim với phân trang cố định.",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('Status code is 200', function () {",
+                    "  pm.response.to.have.status(200);",
+                    "});",
+                    "const json = pm.response.json();",
+                    "pm.test('Success is true', function () {",
+                    "  pm.expect(json.success).to.eql(true);",
+                    "});",
+                    "pm.test('Pagination payload exists', function () {",
+                    "  pm.expect(json.data).to.have.property('currentPage');",
+                    "  pm.expect(json.data).to.have.property('currentItem');",
+                    "  pm.expect(json.data).to.have.property('totalPage');",
+                    "  pm.expect(json.data.currentItem).to.be.an('array');",
+                    "});"
+                  ]
+                }
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "name": "Get Movies - By Genre",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/movies?page=1&limit=10&genreId={{genreId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "movies"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "genreId",
+                  "value": "{{genreId}}"
+                }
+              ]
+            },
+            "description": "Lấy danh sách phim theo thể loại để kiểm tra filter genre.",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('Status code is 200', function () {",
+                    "  pm.response.to.have.status(200);",
+                    "});",
+                    "const json = pm.response.json();",
+                    "pm.test('Success is true', function () {",
+                    "  pm.expect(json.success).to.eql(true);",
+                    "});",
+                    "pm.test('Filtered movie payload exists', function () {",
+                    "  pm.expect(json.data).to.have.property('currentItem');",
+                    "  pm.expect(json.data.currentItem).to.be.an('array');",
+                    "});"
+                  ]
+                }
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "name": "Get Movie By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/movies/{{movieId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "movies",
+                "{{movieId}}"
+              ]
+            },
+            "description": "Lấy chi tiết một phim theo id.",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('Status code is 200', function () {",
+                    "  pm.response.to.have.status(200);",
+                    "});",
+                    "const json = pm.response.json();",
+                    "pm.test('Success is true', function () {",
+                    "  pm.expect(json.success).to.eql(true);",
+                    "});",
+                    "pm.test('Movie object exists', function () {",
+                    "  pm.expect(json.data).to.be.an('object');",
+                    "  pm.expect(json.data).to.have.property('title');",
+                    "});"
+                  ]
+                }
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "name": "Create Movie",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Postman Movie {{$timestamp}}\",\n  \"description\": \"Phim test từ Postman collection.\",\n  \"director\": \"Postman Team\",\n  \"cast\": \"Actor A, Actor B\",\n  \"durationMinutes\": 120,\n  \"releaseDate\": \"2026-05-20\",\n  \"posterUrl\": \"https://example.com/poster.jpg\",\n  \"trailerUrl\": \"https://example.com/trailer.mp4\",\n  \"ageRating\": \"P\",\n  \"status\": \"SHOWING\",\n  \"isHot\": true,\n  \"genres\": [\"{{genreId}}\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/movies",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "movies"
+              ]
+            },
+            "description": "Tạo phim mới. Yêu cầu đã đăng nhập bằng cookie accessToken và role ADMIN.",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('Status code is 201', function () {",
+                    "  pm.response.to.have.status(201);",
+                    "});",
+                    "const json = pm.response.json();",
+                    "pm.test('Success is true', function () {",
+                    "  pm.expect(json.success).to.eql(true);",
+                    "});",
+                    "pm.test('Created movie returned', function () {",
+                    "  pm.expect(json.data).to.be.an('object');",
+                    "  pm.expect(json.data).to.have.property('_id');",
+                    "});",
+                    "const createdMovieId = json.data && (json.data._id || json.data.id);",
+                    "if (createdMovieId) {",
+                    "  pm.collectionVariables.set('movieId', createdMovieId);",
+                    "}"
+                  ]
+                }
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "name": "Update Movie",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Postman Movie Updated {{$timestamp}}\",\n  \"status\": \"STOPPED\",\n  \"isHot\": false,\n  \"genres\": [\"{{genreId}}\"]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/movies/{{movieId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "movies",
+                "{{movieId}}"
+              ]
+            },
+            "description": "Cập nhật phim theo id. Nên chạy sau request Create Movie để có movieId.",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('Status code is 200', function () {",
+                    "  pm.response.to.have.status(200);",
+                    "});",
+                    "const json = pm.response.json();",
+                    "pm.test('Success is true', function () {",
+                    "  pm.expect(json.success).to.eql(true);",
+                    "});",
+                    "pm.test('Updated movie returned', function () {",
+                    "  pm.expect(json.data).to.be.an('object');",
+                    "});"
+                  ]
+                }
+              }
+            ],
+            "response": []
+          }
+        },
+        {
+          "name": "Delete Movie",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/movies/{{movieId}}",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "movies",
+                "{{movieId}}"
+              ]
+            },
+            "description": "Xóa phim theo id. Nên chạy sau request Create Movie để có movieId.",
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('Status code is 200', function () {",
+                    "  pm.response.to.have.status(200);",
+                    "});",
+                    "const json = pm.response.json();",
+                    "pm.test('Success is true', function () {",
+                    "  pm.expect(json.success).to.eql(true);",
+                    "});",
+                    "pm.test('Delete returns null data', function () {",
+                    "  pm.expect(json.data).to.eql(null);",
+                    "});"
+                  ]
+                }
+              }
+            ],
+            "response": []
+          }
+        }
+      ],
+      "description": "Movie endpoints: list, detail, filter by genre, create, update, delete."
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            ""
+          ]
+        },
+        "description": "Kiểm tra server đang hoạt động"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "genreId",
+      "value": "6a0d19d6fc048e1f2bd71fa2"
+    },
+    {
+      "key": "movieId",
+      "value": "000000000000000000000000"
+    }
+  ]
+}

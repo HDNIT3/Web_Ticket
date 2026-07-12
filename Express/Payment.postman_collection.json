@@ -1,0 +1,73 @@
+{
+  "info": {
+    "_postman_id": "177b271d-7595-4b1c-9a0f-4eb9c6289909",
+    "name": "Payment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "32945292",
+    "_collection_link": "https://go.postman.co/collection/32945292-177b271d-7595-4b1c-9a0f-4eb9c6289909?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Tạo url vnpay",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"bookingId\" : \"6a15a52030795676a3428e34\",\r\n    \"method\" : \"momo\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/api/payment",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "payment"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"nguyenhuynh.663459@gmail.com\",\r\n    \"password\":\"123123123\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
